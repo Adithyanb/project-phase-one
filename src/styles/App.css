@@ -1,0 +1,52 @@
+/* Ensure the body has the same background color as the app */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #333; /* Matches the background color of #app */
+   /* Prevents scrolling */
+}
+
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: white;
+  min-height: 100vh;
+  background-color: #333; /* Ensure consistency */
+  position: relative;
+  overflow: hidden; /* Prevents scrolling */
+}
+
+header {
+  background-color: #222;
+  padding: 1rem;
+  width: 100%;
+  position: relative;
+}
+
+h1 {
+  font-size: 5rem; /* Increased font size */
+  margin: 0;
+  text-align: center;
+  margin-top: 3rem; /* Adjusted to move downward */
+}
+footer {
+  background-color: #272626;
+  color: white;
+  
+  font-size: .8rem;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+/* Add to your App.css */
+.header-title {
+  text-decoration: none;
+  color: inherit;
+}
+
+.header-title h1 {
+  cursor: pointer;
+  /* Add any other styling for your h1 */
+}

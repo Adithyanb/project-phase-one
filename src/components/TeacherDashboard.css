@@ -1,0 +1,170 @@
+.teacher-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-height: 73vh;
+  background-color: #121212;
+  color: #ffffff;
+  padding-left: 50px;
+}
+
+.header {
+  text-align: center;
+  padding: 0px 0;
+  background-color: #121212;
+}
+
+.app-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.content {
+  display: flex;
+  gap: 20px;
+  padding: 0 20px;
+  margin-bottom: 20px;
+}
+
+.left-section {
+  flex: 0.4;
+  padding: 20px;
+  background-color: #1e1e1e;
+  border: 1px solid #333;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.right-section {
+  flex: 0.6;
+  padding: 20px;
+  background-color: #1e1e1e;
+  border: 1px solid #333;
+  border-radius: 8px;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.section-subtitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.upload-controls,
+.interaction-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.file-input,
+.text-input {
+  background-color: #2c2c2c;
+  color: #ffffff;
+  border: 1px solid #555;
+  border-radius: 4px;
+  padding: 8px;
+  
+}
+
+.file-input {
+  border: none;
+}
+
+.upload-button,
+.submit-button,
+.delete-button {
+  background-color: #3a3a3a;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.upload-button:hover,
+.submit-button:hover,
+.delete-button:hover {
+  background-color: #4a4a4a;
+}
+
+.uploaded-items {
+  margin-top: 20px;
+}
+
+.item-card {
+  background-color: #2c2c2c;
+  padding: 15px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.item-name {
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.item-date {
+  font-size: 0.9rem;
+  color: #aaa;
+  margin-bottom: 5px;
+}
+
+.item-content {
+  font-size: 0.9rem;
+  color: #888;
+  margin-bottom: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.answer-box {
+  background-color: #2c2c2c;
+  padding: 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.answer-content {
+  background-color: #1e1e1e;
+  padding: 20px;
+  border-radius: 4px;
+  min-height: 200px;
+  font-size: 1.1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .content {
+    flex-direction: column;
+  }
+
+  .left-section,
+  .right-section {
+    flex: 1;
+  }
+}
+
+/* Input Focus States */
+.text-input:focus,
+.file-input:focus {
+  outline: none;
+  border-color: #666;
+}
+
+/* Button Active States */
+.upload-button:active,
+.submit-button:active,
+.delete-button:active {
+  background-color: #555;
+}

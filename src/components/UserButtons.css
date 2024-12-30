@@ -1,0 +1,37 @@
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem; /* Increased gap for more space between title and buttons */
+  width: 100%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 6rem; /* Moved buttons further down */
+}
+
+.btn {
+  width: 225px; /* Increased button width */
+  height: 67px; /* Increased button height */
+  font-size: 1.65rem; /* Increased font size */
+  font-weight: bold;
+  border-radius: 35px; /* Adjusted border radius for larger buttons */
+  background-color: #444;
+  color: white;
+  border: none; /* Removed white border */
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn:hover {
+  background-color: #555;
+  transform: scale(1.05);
+}
+
+.btn-teachers {
+  order: 2;
+}
+
+.btn-students {
+  order: 1;
+}
