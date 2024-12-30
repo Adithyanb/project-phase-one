@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { registerUser } from "../../services/firebase";
+
 const TeacherSignup = () => {
   const navigate = useNavigate();
   const [error, setError] = useState('');
@@ -22,18 +23,11 @@ const TeacherSignup = () => {
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
       setError('');
-      // Verify special passkey first if needed
       if (values.specialPasskey !== '1234') {
         throw new Error('Invalid teacher passkey');
       }
       
-      // Register teacher with Firebase
-      const user = await registerUser(values.email, values.password);
-      
-      // Store additional teacher data if needed
-      // You can add Firestore code here to store username and other details
-      
-      // Redirect to login page after successful registration
+      await registerUser(values.email, values.password, 'teacher', values.username);
       navigate('/teacher/login');
     } catch (error) {
       setError(error.message);

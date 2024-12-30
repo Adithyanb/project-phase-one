@@ -16,14 +16,13 @@ const Login = ({ userType }) => {
   const handleLogin = async (values, { setSubmitting }) => {
     try {
       setError('');
-      const user = await loginUser(values.email, values.password);
+      const { user, userData } = await loginUser(values.email, values.password, userType.toLowerCase());
         
-      // Store user information
       localStorage.setItem('isAuthenticated', 'true');
       localStorage.setItem('userType', userType);
       localStorage.setItem('userId', user.uid);
+      localStorage.setItem('username', userData.username);
         
-      // Navigate based on user type
       navigate(userType === 'Teacher' ? '/teacher/dashboard' : '/student/dashboard');
     } catch (error) {
       setError(error.message);

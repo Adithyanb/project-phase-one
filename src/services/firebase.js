@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
   signOut
 } from 'firebase/auth';
+import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: "AIzaSyA3M-Z-Eekpo2L0OF77uAmW09Akz9-qDCM",
@@ -17,27 +18,54 @@ const firebaseConfig = {
   measurementId: "G-JCFGLDZK6B"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
 
-// In your firebase.js file, add logs to registerUser function:
-export const registerUser = async (email, password) => {
+export const registerUser = async (email, password, userType, username) => {
+  try {
+    console.log('Attempting to register user:', email);
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    
     try {
-      console.log('Attempting to register user:', email);
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      console.log('Registration successful:', userCredential);
-      return userCredential.user;
-    } catch (error) {
-      console.error('Registration error:', error);
-      throw error;
+      // Store user type and username in Firestore
+      await setDoc(doc(db, 'users', userCredential.user.uid), {
+        email,
+        username,
+        userType,
+        createdAt: new Date().toISOString()
+      });
+    } catch (firestoreError) {
+      // If Firestore write fails, delete the created auth user
+      console.error('Firestore error:', firestoreError);
+      await userCredential.user.delete();
+      throw new Error('Registration failed: Database access error. Please try again.');
     }
-  };
+    
+    console.log('Registration successful:', userCredential);
+    return userCredential.user;
+  } catch (error) {
+    console.error('Registration error:', error);
+    throw error;
+  }
+};
 
-export const loginUser = async (email, password) => {
+export const loginUser = async (email, password, expectedUserType) => {
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    return userCredential.user;
+    
+    const userDoc = await getDoc(doc(db, 'users', userCredential.user.uid));
+    const userData = userDoc.data();
+    
+    if (userData.userType !== expectedUserType) {
+      await signOut(auth);
+      throw new Error(`Invalid account type. Please use the ${expectedUserType} login.`);
+    }
+    
+    return {
+      user: userCredential.user,
+      userData
+    };
   } catch (error) {
     throw error;
   }
@@ -46,9 +74,10 @@ export const loginUser = async (email, password) => {
 export const logoutUser = async () => {
   try {
     await signOut(auth);
+    localStorage.clear();
   } catch (error) {
     throw error;
   }
 };
 
-export { auth };
+export { auth, db };

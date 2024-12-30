@@ -21,20 +21,15 @@ const StudentSignup = () => {
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
-      setError(''); // Clear any previous errors
-      console.log('Starting registration process...'); // Debug log
+      setError('');
+      console.log('Starting registration process...');
       
-      // Register with Firebase
-      const user = await registerUser(values.email, values.password);
-      console.log('User registered successfully:', user); // Debug log
+      await registerUser(values.email, values.password, 'student', values.username);
       
-      // Store additional user data if needed
-      // You might want to store the username in a different collection
-      
-      // Redirect to login page after successful registration
+      console.log('User registered successfully');
       navigate('/student/login');
     } catch (error) {
-      console.error('Registration error:', error); // Debug log
+      console.error('Registration error:', error);
       setError(error.message || 'An error occurred during registration');
     } finally {
       setSubmitting(false);
