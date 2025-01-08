@@ -142,6 +142,15 @@
   min-height: 200px;
   font-size: 1.1rem;
 }
+.item-card {
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.item-card.selected {
+  background-color: #e3f2fd;
+  border: 1px solid #2196f3;
+}
 
 /* Responsive Design */
 @media (max-width: 768px) {
