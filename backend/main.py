@@ -113,6 +113,32 @@ async def upload_file(file: UploadFile = File(...)):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+@app.post("/api/upload/text")
+async def upload_text(text_upload: TextUpload):
+    try:
+        timestamp = datetime.now().timestamp()
+        filename = f"text_{timestamp}.txt"
+        file_path = TEXT_DIR / filename
+        
+        # Save the text content to a file
+        file_path.write_text(text_upload.content)
+        
+        items = load_items()
+        new_item = {
+            "id": str(timestamp),
+            "fileName": filename,
+            "fileType": "text",
+            "uploadedAt": datetime.now().isoformat(),
+            "content": str(file_path),
+            "extractedContent": text_upload.content
+        }
+        items.append(new_item)
+        save_items(items)
+        
+        return {"message": "Text uploaded successfully", "item": new_item}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 @app.post("/api/interact")
 async def interact_with_text(text: str = Form(...), document_id: Optional[str] = Form(None)):
     try:
@@ -157,7 +183,11 @@ Please provide a detailed answer based on the document content above."""
 
 @app.get("/api/items")
 async def get_items():
-    return load_items()
+    items = load_items()
+    for item in items:
+        if "extractedContent" not in item:
+            item["extractedContent"] = get_document_content(item["id"])
+    return items
 
 @app.delete("/api/items/{item_id}")
 async def delete_item(item_id: str):
