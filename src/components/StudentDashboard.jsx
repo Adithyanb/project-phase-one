@@ -4,9 +4,11 @@ import "./StudentDashboard.css";
 const StudentDashboard = () => {
   const [textToInteract, setTextToInteract] = useState("");
   const [interactionResult, setInteractionResult] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const interactWithText = async () => {
     try {
+      setIsLoading(true);
       const formData = new FormData();
       formData.append("text", textToInteract);
 
@@ -19,6 +21,8 @@ const StudentDashboard = () => {
       setTextToInteract("");
     } catch (error) {
       console.error("Error interacting:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -28,7 +32,7 @@ const StudentDashboard = () => {
         <div className="answer-box">
           <h3 className="section-subtitle">Retrieved Answer</h3>
           <div className="answer-content">
-            {interactionResult || "No response yet"}
+            {isLoading ? "Thinking..." : (interactionResult || "No response yet")}
           </div>
         </div>
 

@@ -1,68 +1,68 @@
 .teacher-dashboard {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  min-height: 73vh;
+  gap: clamp(1rem, 2vw, 1.25rem);
+  
   background-color: #121212;
   color: #ffffff;
-  padding-left: 50px;
+  padding: clamp(0.3rem, 1.5vw, 1rem) clamp(1.5rem, 4vw, 4rem);
+
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
-.header {
-  text-align: center;
-  padding: 0px 0;
-  background-color: #121212;
-}
+
 
 .app-title {
-  font-size: 2.5rem;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
   font-weight: bold;
   color: #ffffff;
 }
 
 .content {
   display: flex;
-  gap: 20px;
-  padding: 0 20px;
-  margin-bottom: 20px;
+  gap: clamp(1rem, 2vw, 1.25rem);
+  padding: 0 clamp(0.5rem, 2vw, 1.25rem);
+  
 }
 
 .left-section {
   flex: 0.4;
-  padding: 20px;
+  padding: clamp(1rem, 2vw, 1.25rem);
   background-color: #1e1e1e;
   border: 1px solid #333;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: clamp(0.75rem, 1.5vw, 1.25rem);
 }
 
 .right-section {
   flex: 0.6;
-  padding: 20px;
+  padding: clamp(1rem, 2vw, 1.25rem);
   background-color: #1e1e1e;
   border: 1px solid #333;
   border-radius: 8px;
 }
 
 .section-title {
-  font-size: 1.5rem;
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
   font-weight: 600;
-  margin-bottom: 15px;
+  margin-bottom: clamp(0.75rem, 1.5vw, 0.938rem);
 }
 
 .section-subtitle {
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 2vw, 1.2rem);
   font-weight: 600;
-  margin-bottom: 10px;
+  margin-bottom: clamp(0.5rem, 1vw, 0.625rem);
 }
 
 .upload-controls,
 .interaction-controls {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: clamp(0.5rem, 1vw, 0.625rem);
 }
 
 .file-input,
@@ -71,8 +71,8 @@
   color: #ffffff;
   border: 1px solid #555;
   border-radius: 4px;
-  padding: 8px;
-  
+  padding: clamp(0.5rem, 1vw, 0.625rem);
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
 }
 
 .file-input {
@@ -86,9 +86,10 @@
   color: #ffffff;
   border: none;
   border-radius: 4px;
-  padding: 8px 16px;
+  padding: clamp(0.5rem, 1vw, 0.625rem) clamp(0.75rem, 1.5vw, 1rem);
   cursor: pointer;
   transition: background-color 0.2s ease;
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
 }
 
 .upload-button:hover,
@@ -98,31 +99,34 @@
 }
 
 .uploaded-items {
-  margin-top: 20px;
+  margin-top: clamp(1rem, 2vw, 1.25rem);
 }
 
 .item-card {
   background-color: #2c2c2c;
-  padding: 15px;
+  padding: clamp(0.75rem, 1.5vw, 0.938rem);
   border-radius: 4px;
-  margin-bottom: 10px;
+  margin-bottom: clamp(0.5rem, 1vw, 0.625rem);
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .item-name {
   font-weight: 500;
-  margin-bottom: 5px;
+  margin-bottom: clamp(0.25rem, 0.5vw, 0.313rem);
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
 }
 
 .item-date {
-  font-size: 0.9rem;
+  font-size: clamp(0.75rem, 1.25vw, 0.9rem);
   color: #aaa;
-  margin-bottom: 5px;
+  margin-bottom: clamp(0.25rem, 0.5vw, 0.313rem);
 }
 
 .item-content {
-  font-size: 0.9rem;
+  font-size: clamp(0.75rem, 1.25vw, 0.9rem);
   color: #888;
-  margin-bottom: 10px;
+  margin-bottom: clamp(0.5rem, 1vw, 0.625rem);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -130,21 +134,17 @@
 
 .answer-box {
   background-color: #2c2c2c;
-  padding: 15px;
+  padding: clamp(0.75rem, 1.5vw, 0.938rem);
   border-radius: 4px;
-  margin-bottom: 20px;
+  margin-bottom: clamp(1rem, 2vw, 1.25rem);
 }
 
 .answer-content {
   background-color: #1e1e1e;
-  padding: 20px;
+  padding: clamp(1rem, 2vw, 1.25rem);
   border-radius: 4px;
-  min-height: 200px;
-  font-size: 1.1rem;
-}
-.item-card {
-  cursor: pointer;
-  transition: background-color 0.3s;
+  min-height: clamp(150px, 30vh, 200px);
+  font-size: clamp(0.875rem, 1.5vw, 1.1rem);
 }
 
 .item-card.selected {
@@ -152,8 +152,8 @@
   border: 1px solid #2196f3;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
+/* Breakpoints for different screen sizes */
+@media (max-width: 1024px) {
   .content {
     flex-direction: column;
   }
@@ -161,17 +161,28 @@
   .left-section,
   .right-section {
     flex: 1;
+    width: 100%;
   }
 }
 
-/* Input Focus States */
+@media (max-width: 480px) {
+  .teacher-dashboard {
+    padding: 0.5rem;
+  }
+  
+  .content {
+    padding: 0;
+  }
+}
+
+/* Focus states */
 .text-input:focus,
 .file-input:focus {
   outline: none;
   border-color: #666;
 }
 
-/* Button Active States */
+/* Active states */
 .upload-button:active,
 .submit-button:active,
 .delete-button:active {
